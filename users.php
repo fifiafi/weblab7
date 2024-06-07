@@ -22,14 +22,14 @@
         <tbody>
         <?php
             require('database.php');
-            $data = weblab7::selectData();
+            $data = weblab7Table::selectData();
             if (isset($_GET['delete'])) {
                 $matric = $_GET['delete'];
                 $result = (new weblab7())->delete($matric);
                 if ($result) {
                     echo "<script>alert('Record deleted successfully.'); windoq.location.href = 'users.php';</script>";
                 } else {
-                    echo "<script>alert('Error deleting record.');</script>";
+                    echo "<script>alert('Deleting record.');</script>";
                 }
             }
 

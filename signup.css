@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: lightblue;/* Add any styles for the body if needed */
+    background-color: lightblue;
 }
 
 .form {
@@ -65,3 +65,4 @@ a {
     position: absolute;
     text-align: center;
 }
+

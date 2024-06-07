@@ -4,67 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./signup.css">
+    <link rel="stylesheet" href="./update.css">
     <title>Document</title>
 </head>
 
 <body>
 <?php
-require('./database.php');
-if (isset($_POST['signUP_button'])) {
-    $matric = $_POST['matric'];
-    $name = $_POST['name'];
-    $password = $_POST['password'];
-    $role = $_POST['role'];
+        session_start();
+        require('database.php');
 
-    if (!empty($matric) && !empty($name) && !empty($password) && !empty($role)) {
-        try {
-            $pdo = weblab7::connect();
-           
-            $check_query = $pdo->prepare('SELECT * FROM weblab7Table WHERE matric = :m');
-            $check_query->bindValue(':m', $matric);
-            $check_query->execute();
-            $existing_record = $check_query->fetch(PDO::FETCH_ASSOC);
-            
-            if ($existing_record) {
-                
-                $update_query = $pdo->prepare('UPDATE weblab7Table SET name=:n, password=:p, role=:r WHERE matric=:m');
-                $update_query->bindValue(':m', $matric);
-                $update_query->bindValue(':n', $name);
-                $update_query->bindValue(':p', $password);
-                $update_query->bindValue(':r', $role);
-                
-                if ($update_query->execute()) {
-                    echo 'Update successfully!';
+        if (isset($_GET['matric'])) {
+            $matric = $_GET['matric'];
+            $data = weblab7Table::selectData();
+            $user = array_filter($data, function ($user) use ($matric) {
+                return $user['matric'] === $matric;
+            });
+            if (!empty($user)) {
+                $user = array_values($user)[0];
+            } else {
+                echo "User not found.";
+                exit;
+            }
+        }
+
+        if (isset($_POST['button'])) {
+            $matric = $_POST['matric'];
+            $name = $_POST['name'];
+            $password = $_POST['password'];
+            $role = $_POST['role'];
+
+            if (!empty($matric) && !empty($name) && !empty($password) && !empty($role)) {
+                $weblab7 = new weblab7Table();
+                $updateResult = $weblab7->update($matric, $name, $password, $role);
+
+                if ($updateResult) {
+                    $_SESSION['validate'] = true;
+                    header("Location: users.php");
+                    exit();
                 } else {
-                    echo 'Failed to update!';
+                    echo 'Updated.';
                 }
             } else {
-                echo 'Record with matric ' . $matric . ' does not exist.';
+                echo 'Please fill all the fields!';
             }
-        } catch (PDOException $e) {
-            echo 'Database error: ' . $e->getMessage();
-        } catch (Exception $e) {
-            echo 'General error: ' . $e->getMessage();
         }
-    } else {
-        echo 'Please fill in all fields!';
-    }
-}
-?>
-<div class="form">
-    <div class="title">
-        <h2>Sign Up form</h2>
-    </div>
-    <form action="" method="post">
-        <input type="text" name="matric" placeholder="matric" required>
-        <input type="text" name="name" placeholder="name" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="text" name="role" placeholder="role" required>
-        <input type="submit" value="Update" name="update_button">
-        <a href="./login.php">Log In</a>
-    </form>
-</div>
-</body>
+    ?>
+  <div class="signup-form">
+        <h2>Update User</h2>
+        <form action="" method="POST">
+            <label for="matric">Matric</label>
+            <input type="text" id="matric" name="matric" value="<?php echo isset($user['matric']) ? $user['matric'] : ''; ?>" readonly required>
+            
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="<?php echo isset($user['name']) ? $user['name'] : ''; ?>" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" value="<?php echo isset($user['password']) ? $user['password'] : ''; ?>" required>
 
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+                <option value="" disabled>Select your role</option>
+                <option value="Student" <?php echo isset($user['role']) && $user['role'] === 'Student' ? 'selected' : ''; ?>>Student</option>
+                <option value="Lecturer" <?php echo isset($user['role']) && $user['role'] === 'Lecturer' ? 'selected' : ''; ?>>Lecturer</option>
+            </select>
+            <button type="submit" name="button">Update</button>
+        </form>
+    </div>
+</body>
 </html>

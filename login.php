@@ -27,7 +27,7 @@ if (isset($_POST['login_button'])) {
     $password = $_POST['password'];
 
     try {
-        $p = weblab7::connect()->prepare('SELECT * FROM weblab7Table WHERE matric = :m AND password = :p');
+        $p = weblab7Table::connect()->prepare('SELECT * FROM weblab7Table WHERE matric = :m AND password = :p');
         $p->bindValue(':m', $matric);
         $p->bindValue(':p', $password);
         $p->execute();
