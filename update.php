@@ -15,7 +15,7 @@
 
         if (isset($_GET['matric'])) {
             $matric = $_GET['matric'];
-            $data = weblab7Table::selectData();
+            $data = weblab7::selectData();
             $user = array_filter($data, function ($user) use ($matric) {
                 return $user['matric'] === $matric;
             });
@@ -34,7 +34,7 @@
             $role = $_POST['role'];
 
             if (!empty($matric) && !empty($name) && !empty($password) && !empty($role)) {
-                $weblab7 = new weblab7Table();
+                $weblab7 = new weblab7();
                 $updateResult = $weblab7->update($matric, $name, $password, $role);
 
                 if ($updateResult) {

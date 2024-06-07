@@ -9,6 +9,7 @@
 <body>
     <table>
         <br>
+        <h1>Hi, I'm Nur Afifah Binti Nor'Azmi</h1>
         <thead>
             <tr>
                 <th>Matric Number</th>
@@ -22,7 +23,7 @@
         <tbody>
         <?php
             require('database.php');
-            $data = weblab7Table::selectData();
+            $data = weblab7::selectData();
             if (isset($_GET['delete'])) {
                 $matric = $_GET['delete'];
                 $result = (new weblab7())->delete($matric);
