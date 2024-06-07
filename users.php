@@ -8,6 +8,7 @@
 </head>
 <body>
     <table>
+        <br>
         <thead>
             <tr>
                 <th>Matric Number</th>
@@ -46,6 +47,9 @@
             }
         ?>
         </tbody>
+        
     </table>
+    <br>
+    <a href="./login.php" class="center-logout">Log Out</a>
 </body>
 </html>

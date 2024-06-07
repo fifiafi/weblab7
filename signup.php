@@ -50,7 +50,7 @@
             <input type="password" name="password" placeholder="Password" required>
             <input type="text" name="role" placeholder="role" required>
             <input type="submit" value="Sign Up" name="signUP_button">
-            <a href="./login.php">Do you have account? log In in</a>
+            <a href="./login.php">Do you have account? Log In</a>
         </form>
     </div>
 </body>

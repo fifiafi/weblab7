@@ -56,7 +56,7 @@ if (isset($_POST['login_button'])) {
         <input type="text" name="matric" placeholder="matric" required>
         <input type="password" name="password" placeholder="Password" required>
         <input type="submit" value="Login" name="login_button">
-        <a href="./signup.php" style="position:center; left:50px;top:-8px; font-size:14px">Click here to sign up</a>
+        <a href="./signup.php"> </a>
     </form>
 </div>
 

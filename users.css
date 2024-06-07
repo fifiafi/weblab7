@@ -9,7 +9,7 @@ body{
 }
 
 table{
-    width: 90%;
+    width: 50%;
     display: block;
     margin: auto;
 }
@@ -30,4 +30,11 @@ td{
 
 a{
     text-decoration: none;
+}
+
+.center-logout {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    width: fit-content;
 }

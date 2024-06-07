@@ -22,5 +22,13 @@ class weblab7 {
         $p->bindValue(':matric', $matric);
         $p->execute();
 }
+public static function update($matric, $name, $password, $role) {
+    $p = weblab7::connect()->prepare('UPDATE weblab7Table SET matric=:m, name=:n, password=:p, role=:r');
+                $p->bindValue(':m', $matric);
+                $p->bindValue(':n', $name);
+                $p->bindValue(':p', $password);
+                $p->bindValue(':r', $role);
+                $p->execute();
+}
 }
 ?>
