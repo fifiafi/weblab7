@@ -5,7 +5,7 @@
 }
 
 body {
-    /* Add any styles for the body if needed */
+    background-color: lightblue;/* Add any styles for the body if needed */
 }
 
 .form {
@@ -13,17 +13,17 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: chocolate;
+    background: rgb(180, 238, 230);
     width: 300px;
     height: 400px;
     border-radius: 3px;
 }
 
 .form input { 
-    border: 1px solid rgb(56, 165, 56);
+    border: 1px solid rgb(0, 0, 0);
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 
                 -1px -1px 2px rgba(180, 180, 180, 0.3); 
-    transform: translateY(40px);
+    transform: translateY(50px);
     display: block;
     margin: 15px auto 0 auto;
     height: 30px;
@@ -37,7 +37,7 @@ input:focus {
 
 .form input[type="submit"] {
     margin-top: 20px;
-    background: peru;
+    background: rgb(177, 58, 107);
     width: 77%;
     color: aliceblue;
     border: none;
@@ -47,5 +47,17 @@ input:focus {
 
 ::placeholder {
     position: relative;
+    left: 20px;
     text-align: justify;
+}
+
+.title{
+    transform: translate(30px,40px);
+}
+
+.title h2{
+    color: black;
+    font-size: 1.2em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
 }
